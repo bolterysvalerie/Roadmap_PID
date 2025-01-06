@@ -1,0 +1,12 @@
+[33mcecc56a[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Protection contre les attaques CSRF
+[33m3cd8322[m Models, controllers, templates and routes for Type and Locality
+[33m77ca54b[m Spring Security configuration
+[33mb8923cd[m Update modèle User +migration + seeders
+[33m04d520c[m Form Delete Artist
+[33m2ee8294[m Form create Artist
+[33m6be7a95[m Form update Artist
+[33m694af50[m Controller Artist +templates +routes
+[33m12a9157[m Modèle Artist +migration +données initiales
+[33m4986adc[m After database configuration
+[33mc5821ff[m add mysql dependency and properties
+[33m64dab83[m After framework installation

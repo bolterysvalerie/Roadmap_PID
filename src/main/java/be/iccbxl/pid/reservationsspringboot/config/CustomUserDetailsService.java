@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import be.iccbxl.pid.reservationsspringboot.model.User;
+import be.iccbxl.pid.reservationsspringboot.model.UserRole;
 import be.iccbxl.pid.reservationsspringboot.repository.UserRepository;
 
 @Service
@@ -23,13 +24,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByLogin(username);
 
         return new org.springframework.security.core.userdetails.User(
-                user.getLogin(), user.getPassword(),
-                getGrantedAuthorities(user.getRole()));
+                user.getLogin(),
+                user.getPassword(),
+                getGrantedAuthorities(user.getRole())
+        );
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(String role) {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+    private List<GrantedAuthority> getGrantedAuthorities(UserRole role) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        // Utilisation de la méthode `name()` pour obtenir le nom de l'énumération
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
         return authorities;
     }
 }
