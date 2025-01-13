@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name="locations")
 public class Location {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique=true)
@@ -30,6 +30,9 @@ public class Location {
 
     @OneToMany(targetEntity=Show.class, mappedBy="location")
     private List<Show> shows = new ArrayList<>();
+
+    @OneToMany(targetEntity=Representation.class, mappedBy="location")
+    private List<Representation> representations = new ArrayList<>();
 
     protected Location() { }
 
@@ -126,12 +129,38 @@ public class Location {
         return this;
     }
 
+    public List<Representation> getRepresentations() {
+        return representations;
+    }
+
+    public Location addRepresentation(Representation representation) {
+        if(!this.representations.contains(representation)) {
+            this.representations.add(representation);
+            representation.setLocation(this);
+        }
+
+        return this;
+    }
+
+    public Location removeRepresentation(Representation representation) {
+        if(this.representations.contains(representation)) {
+            this.representations.remove(representation);
+            if(representation.getLocation().equals(this)) {
+                representation.setLocation(null);
+            }
+        }
+
+        return this;
+    }
+
 
     @Override
     public String toString() {
         return "Location [id=" + id + ", slug=" + slug + ", designation=" + designation
                 + ", address=" + address	+ ", locality=" + locality + ", website="
-                + website + ", phone=" + phone + "]";
+                + website + ", phone=" + phone + ", shows=" + shows.size()
+                + ", representations=" + representations.size() +
+                "]";
     }
 }
 
