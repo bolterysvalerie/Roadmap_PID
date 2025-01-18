@@ -1,14 +1,10 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +27,32 @@ public class User {
     private UserRole role;
 
     private LocalDateTime created_at;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Representation> representations = new ArrayList<>();
+
+    public List<Representation> getRepresentations() {
+        return representations;
+    }
+
+    public User addRepresentation(Representation representation) {
+        if(!this.representations.contains(representation)) {
+            this.representations.add(representation);
+            representation.addUser(this);
+        }
+
+        return this;
+    }
+
+    public User removeRepresentation(Representation representation) {
+        if(this.representations.contains(representation)) {
+            this.representations.remove(representation);
+            representation.getUsers().remove(this);
+        }
+
+        return this;
+    }
+
 
     @Override
     public String toString() {
