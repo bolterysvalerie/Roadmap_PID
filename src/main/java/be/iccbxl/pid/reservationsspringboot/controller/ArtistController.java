@@ -33,6 +33,15 @@ public class ArtistController {
     public String show(Model model, @PathVariable("id") long id) {
         Artist artist = service.getArtist(id);
 
+        if (artist == null) {
+            // Option 1: Afficher une page d'erreur personnalisée
+           // model.addAttribute("message", "Artiste introuvable !");
+           // return "error/404";
+
+            // Option 2: Rediriger vers la liste des artistes
+             return "redirect:/artists";
+        }
+
         model.addAttribute("artist", artist);
         model.addAttribute("title", "Fiche d'un artiste");
 
