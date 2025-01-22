@@ -52,6 +52,9 @@ public class Show {
     @ManyToMany(mappedBy = "shows")
     private List<ArtistType> artistTypes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
 
     public Show() { }
 
@@ -198,6 +201,25 @@ public class Show {
         return this;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public Show addReview(Review review) {
+        if (!reviews.contains(review)) {
+            reviews.add(review);
+            review.setShow(this);
+        }
+        return this;
+    }
+
+    public Show removeReview(Review review) {
+        if (reviews.contains(review)) {
+            reviews.remove(review);
+            review.setShow(null);
+        }
+        return this;
+    }
 
     @Override
     public String toString() {
