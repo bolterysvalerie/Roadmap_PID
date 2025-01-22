@@ -2,6 +2,7 @@ package be.iccbxl.pid.reservationsspringboot.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,12 @@ public class UserService {
         return users;
     }
 
-    public User getUser(long id) {
+    /*public User getUser(long id) {
         return userRepository.findById(id);
+    }*/
+    public User get(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.orElse(null); // Retourne l'utilisateur s'il existe, sinon null
     }
 
     public void addUser(User user) {
