@@ -31,6 +31,10 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private List<Representation> representations = new ArrayList<>();
 
+    // Ajout de la relation avec Review
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
     public List<Representation> getRepresentations() {
         return representations;
     }
@@ -53,6 +57,21 @@ public class User {
         return this;
     }
 
+    public User addReview(Review review) {
+        if (!this.reviews.contains(review)) {
+            this.reviews.add(review);
+            review.setUser(this);
+        }
+        return this;
+    }
+
+    public User removeReview(Review review) {
+        if (this.reviews.contains(review)) {
+            this.reviews.remove(review);
+            review.setUser(null);
+        }
+        return this;
+    }
 
     @Override
     public String toString() {
