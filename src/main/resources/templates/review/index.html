@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+    <title>Liste des avis</title>
+</head>
+<body>
+<div class="container">
+    <div layout:fragment="content">
+        <h1 th:text="${title ?: 'Liste des avis'}">Liste des avis</h1>
+
+        <!-- Liste des avis -->
+        <ul th:if="${reviews != null && !#lists.isEmpty(reviews)}">
+            <li th:each="review : ${reviews}">
+                <p><strong>Spectacle :</strong> <span th:text="${review.show.title}">Nom du spectacle</span></p>
+                <p><strong>Utilisateur :</strong>
+                    <span th:text="${review.user.firstname} + ' ' + ${review.user.lastname}">Prénom Nom</span>
+                </p>
+                <p><strong>Commentaire :</strong> <span th:text="${review.review}">Texte du commentaire</span></p>
+                <p><strong>Étoiles :</strong> <span th:text="${review.stars}">5</span></p>
+                <a th:href="@{/reviews/{id}(id=${review.id})}">Voir plus</a>
+            </li>
+        </ul>
+
+        <!-- Message si la liste est vide -->
+        <p th:if="${reviews == null || #lists.isEmpty(reviews)}">Aucun avis disponible pour le moment.</p>
+    </div>
+</div>
+</body>
+</html>

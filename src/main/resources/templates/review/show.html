@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+  <title>Fiche d'un avis</title>
+</head>
+<body>
+<div class="container">
+  <div layout:fragment="content">
+    <h1 th:text="'Fiche de l&apos;avis'">Fiche de l'avis</h1>
+
+    <p><strong>Spectacle :</strong> <span th:text="${review.show.title}">Nom du spectacle</span></p>
+    <p><strong>Utilisateur :</strong>
+      <span th:text="${review.user.firstname + ' ' + review.user.lastname}">Prénom Nom</span>
+    </p>
+    <p><strong>Commentaire :</strong> <span th:text="${review.review}">Texte du commentaire</span></p>
+    <p><strong>Étoiles :</strong> <span th:text="${review.stars}">5</span></p>
+    <p><strong>Validé :</strong>
+      <span th:if="${review.validated}" th:text="'Oui'">Oui</span>
+      <span th:unless="${review.validated}" th:text="'Non'">Non</span>
+    </p>
+    <p><strong>Date de création :</strong>
+      <span th:text="${#temporals.format(review.createdAt, 'dd-MM-yyyy HH:mm')}">12-10-2022 13:30</span>
+    </p>
+    <p><strong>Dernière mise à jour :</strong>
+      <span th:text="${#temporals.format(review.updatedAt, 'dd-MM-yyyy HH:mm')}">12-10-2022 13:30</span>
+    </p>
+
+    <nav>
+      <a th:href="@{/reviews}">Retour à la liste des avis</a>
+    </nav>
+  </div>
+</div>
+</body>
+</html>
