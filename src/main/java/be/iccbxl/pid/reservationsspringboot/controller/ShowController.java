@@ -35,6 +35,10 @@ public class ShowController {
     public String show(Model model, @PathVariable("id") String id) {
         Show show = service.get(id);
 
+        if (show == null) {
+            return "redirect:/shows"; // Redirection vers la liste des spectacles
+        }
+
         //Récupérer les artistes du spectacle et les grouper par type
         Map<String, ArrayList<Artist>> collaborateurs = new TreeMap<>();
 
@@ -48,13 +52,12 @@ public class ShowController {
             collaborateurs.get(type).add(at.getArtist());
         }
 
-        model.addAttribute("collaborateurs", collaborateurs);
-
+        // Ajouter les informations au modèle
         model.addAttribute("show", show);
+        model.addAttribute("collaborateurs", collaborateurs);
         model.addAttribute("title", "Fiche d'un spectacle");
 
+        // Retourner la vue associée
         return "show/show";
     }
-
 }
-
