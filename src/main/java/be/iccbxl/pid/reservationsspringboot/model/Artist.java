@@ -1,5 +1,6 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
@@ -24,6 +25,7 @@ public class Artist {
     private String lastname;
 
     @ManyToMany(mappedBy = "artists")
+    @JsonIgnore
     private List<Type> types = new ArrayList<>();
 
 
