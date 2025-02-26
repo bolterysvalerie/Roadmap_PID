@@ -6,8 +6,10 @@
 </head>
 <body>
 <div class="container">
+    <div id="notification" th:replace="~{main :: notification}"></div>
     <div layout:fragment="content">
-        <h1 th:text="${title}">Liste des artistes</h1>
+
+    <h1 th:text="${title}">Liste des artistes</h1>
 
         <div class="actions">
             <a th:href="@{/artists/create}">Add new artist</a>
