@@ -1,6 +1,6 @@
 package be.iccbxl.pid.reservationsspringboot.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 //import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+
+
 
 /*@Configuration
 @EnableWebSecurity
@@ -63,7 +65,7 @@ public class SpringSecurityConfig {
     }
 
  */
-
+// Dernier code ok
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
@@ -98,5 +100,10 @@ public class SpringSecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+
+
+
 }
 
