@@ -29,7 +29,7 @@ public class Artist {
     private List<Type> types = new ArrayList<>();
 
 
-    protected Artist() {}
+    public Artist() {}
 
     public Artist(String firstname, String lastname) {
         this.firstname = firstname;
