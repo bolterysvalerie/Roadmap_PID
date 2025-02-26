@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-//import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 
 
@@ -74,17 +74,28 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+        return http.cors(Customizer.withDefaults())
 
-                //.csrf(csrf -> csrf.disable())
+                .csrf(Customizer.withDefaults())
+               // .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/").permitAll();
+                   // auth.requestMatchers("/").permitAll();
                     auth.requestMatchers("/admin").hasRole("ADMIN");
                     auth.requestMatchers("/user").hasRole("MEMBER");
-                    auth.anyRequest().authenticated();
+                    auth.anyRequest().permitAll();
+                   // auth.anyRequest().authenticated();
                 })
-                .formLogin(Customizer.withDefaults())
-                .rememberMe(Customizer.withDefaults())
+                //.formLogin(Customizer.withDefaults())
+                //.rememberMe(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .usernameParameter("login")
+                        .failureUrl("/login?loginError=true"))
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logoutSuccess=true")
+                        .deleteCookies("JSESSIONID"))
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login?loginRequired=true")))
                 .build();
     }
 
