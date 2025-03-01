@@ -76,17 +76,22 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.cors(Customizer.withDefaults())
 
-                .csrf(Customizer.withDefaults())
-               // .csrf(csrf -> csrf.disable())
+                //.csrf(Customizer.withDefaults())
+                .csrf(csrf -> csrf.disable()) // Désactiver la protection des form
                 .authorizeHttpRequests(auth -> {
                    // auth.requestMatchers("/").permitAll();
                     auth.requestMatchers("/admin").hasRole("ADMIN");
                     auth.requestMatchers("/user").hasRole("MEMBER");
+                    //API
+                    auth.requestMatchers("/api/public/**").permitAll(); //Endpoints publics
+                    auth.requestMatchers("/api/admin/**").hasRole("ADMIN"); //Endpoints admin
+
                     auth.anyRequest().permitAll();
                    // auth.anyRequest().authenticated();
                 })
                 //.formLogin(Customizer.withDefaults())
                 //.rememberMe(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults()) // Authentification de base (utile pour les tests)
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("login")
