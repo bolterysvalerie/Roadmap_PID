@@ -1,0 +1,69 @@
+/* Style de base pour le body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Container principal */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Titres */
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* Liens */
+a {
+    color: #007BFF;  /* bleu par défaut */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Liste et éléments de liste */
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Alerts (succès, erreur, etc.) */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.alert-success {
+    background-color: #e7fbe8;
+    border: 1px solid #cce8cc;
+    color: #256029;
+}
+
+/* Bouton ou lien d'action (optionnel)
+   À ajouter si tu souhaites un style bouton plus poussé
+*/
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+}
+.btn:hover {
+    background-color: #0056b3;
+}

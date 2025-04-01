@@ -3,6 +3,7 @@ package be.iccbxl.pid.reservationsspringboot.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ public class ArtistController {
     @Autowired
     ArtistService service;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/artists")
     public String index(Model model) {
         List<Artist> artists = service.getAllArtists();
@@ -30,6 +32,7 @@ public class ArtistController {
         return "artist/index";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/artists/{id}")
     public String show(Model model, @PathVariable("id") long id) {
         Artist artist = service.getArtist(id);
@@ -128,7 +131,7 @@ public class ArtistController {
     }
  */
 
-
+    @PreAuthorize("hasRole('ADMIN')")
  @GetMapping("/artists/{id}/edit")
 public String edit(Model model, @PathVariable long id, HttpServletRequest request) {
     Artist artist = service.getArtist(id);
@@ -147,6 +150,7 @@ public String edit(Model model, @PathVariable long id, HttpServletRequest reques
     return "artist/edit";
 }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/artists/{id}/edit")
     public String update(@Valid @ModelAttribute Artist artist, BindingResult bindingResult,
                          @PathVariable long id, Model model, RedirectAttributes redirAttrs) {
@@ -168,6 +172,7 @@ public String edit(Model model, @PathVariable long id, HttpServletRequest reques
         return "redirect:/artists/"+artist.getId();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/artists/create")
     public String create(Model model) {
         if (!model.containsAttribute("artist")) {
@@ -177,6 +182,7 @@ public String edit(Model model, @PathVariable long id, HttpServletRequest reques
         return "artist/create";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/artists/create")
     public String store(@Valid @ModelAttribute Artist artist, BindingResult bindingResult,
                         Model model, RedirectAttributes redirAttrs) {
@@ -193,6 +199,7 @@ public String edit(Model model, @PathVariable long id, HttpServletRequest reques
         return "redirect:/artists/"+artist.getId();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/artists/{id}")
     public String delete(@PathVariable long id, Model model, RedirectAttributes redirAttrs) {
         Artist existing = service.getArtist(id);

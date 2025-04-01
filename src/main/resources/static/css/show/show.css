@@ -1,0 +1,79 @@
+/* Basique reset / structure */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Titre principal */
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Image (affiche du spectacle) */
+.container img {
+    display: block;        /* Pour éviter les petits espaces sous l’image */
+    margin-bottom: 1rem;
+}
+
+/* Canvas (là où il n’y a pas d’affiche) */
+.container canvas {
+    margin-bottom: 1rem;
+    /* On peut aussi donner un fond pour le visuel du cadre */
+    background-color: #f5f5f5;
+}
+
+/* Paragraphes de détails */
+.container p {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.container p strong {
+    font-weight: bold;
+}
+
+/* Sous-titres (Liste des représentations / Liste des artistes) */
+h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* Listes (représentations, artistes) */
+ul {
+    list-style-type: none;   /* Pas de puce par défaut */
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+/* Lien de retour */
+nav a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    padding: 8px 15px;
+    background-color: #007bff; /* Couleur du bouton/lien */
+    color: #fff;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background-color: #0056b3;
+}

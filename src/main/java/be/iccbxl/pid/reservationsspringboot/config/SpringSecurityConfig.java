@@ -77,7 +77,7 @@ public class SpringSecurityConfig {
         return http.cors(Customizer.withDefaults())
 
                 //.csrf(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable()) // Désactiver la protection des form
+                //.csrf(csrf -> csrf.disable()) // Désactiver la protection des form
                 .authorizeHttpRequests(auth -> {
                    // auth.requestMatchers("/").permitAll();
                     auth.requestMatchers("/admin").hasRole("ADMIN");
