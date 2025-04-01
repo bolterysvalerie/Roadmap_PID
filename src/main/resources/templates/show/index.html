@@ -1,14 +1,46 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"-->
+<!--      layout:decorate="~{layouts/main}">-->
+<!--<head>-->
+<!--    <title>Liste des spectacles</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <div layout:fragment="content">-->
+<!--        <h1 th:text="${title}">Liste des spectacles</h1>-->
+<!--        <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="/create">Créer un nouveau spectacle</a>-->
+
+<!--        <ul th:unless="${#lists.isEmpty(shows)}">-->
+<!--            <li th:each="show : ${shows}">-->
+<!--                <span th:text="${show.title}">Ayiti</span>-->
+<!--                <span th:if="${show.bookable}" th:text="${show.price} + ' €'">9.99 €</span>-->
+
+<!--                <span th:if="${#lists.size(show.representations)==1}">- 1 représentation</span>-->
+<!--                <span th:if="${#lists.size(show.representations)>1}"-->
+<!--                      th:text="|- ${#lists.size(show.representations)} représentations|">- 2 représentations</span>-->
+<!--                <em th:if="${#lists.size(show.representations)==0}">aucune représentation</em>-->
+
+<!--                <a th:href="@{/shows/{id}(id=${show.id})}">View</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
       layout:decorate="~{layouts/main}">
 <head>
-    <title>Liste des spectacles</title>
+    <title th:text="${title}">Liste des spectacles</title>
 </head>
 <body>
 <div class="container">
     <div layout:fragment="content">
         <h1 th:text="${title}">Liste des spectacles</h1>
+        <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/shows/create}">Créer un nouveau spectacle</a>
 
+        <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
         <ul th:unless="${#lists.isEmpty(shows)}">
             <li th:each="show : ${shows}">
                 <span th:text="${show.title}">Ayiti</span>
@@ -19,7 +51,13 @@
                       th:text="|- ${#lists.size(show.representations)} représentations|">- 2 représentations</span>
                 <em th:if="${#lists.size(show.representations)==0}">aucune représentation</em>
 
-                <a th:href="@{/shows/{id}(id=${show.id})}">View</a>
+                <a th:href="@{/shows/{id}(id=${show.id})}">Voir</a>
+                <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/shows/{id}/edit(id=${show.id})}">Modifier</a>
+                <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                   th:href="@{/shows/delete/{id}(id=${show.id})}"
+                   onclick="return confirm('Es-tu sûr de vouloir supprimer ce spectacle ?');">
+                    Supprimer
+                </a>
             </li>
         </ul>
     </div>
