@@ -38,7 +38,7 @@ public class Show {
      * Date de création du spectacle
      */
     @Column(name="created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     /**
      * Date de modification du spectacle
@@ -46,7 +46,8 @@ public class Show {
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(targetEntity=Representation.class, mappedBy="show")
+   // @OneToMany(targetEntity=Representation.class, mappedBy="show")
+    @OneToMany(mappedBy="show", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Representation> representations = new ArrayList<>();
 
     @ManyToMany(mappedBy = "shows")
@@ -123,6 +124,7 @@ public class Show {
         this.location = location;
         this.location.addShow(this);		//emménager dans le nouveau lieu
     }
+
 
     public boolean isBookable() {
         return bookable;

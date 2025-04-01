@@ -129,6 +129,7 @@ public class Location {
         return this;
     }
 
+
     public List<Representation> getRepresentations() {
         return representations;
     }

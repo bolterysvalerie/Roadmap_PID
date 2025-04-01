@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import be.iccbxl.pid.reservationsspringboot.model.ArtistType;
 import be.iccbxl.pid.reservationsspringboot.model.Location;
 import be.iccbxl.pid.reservationsspringboot.model.Show;
 import be.iccbxl.pid.reservationsspringboot.repository.ShowRepository;
@@ -39,10 +40,26 @@ public class ShowService {
         repository.save(show);
     }
 
-    public void delete(String id) {
-        Long indice = (long) Integer.parseInt(id);
+//    public void delete(String id) {
+//        Long indice = (long) Integer.parseInt(id);
+//
+//        repository.deleteById(indice);
+//    }
 
-        repository.deleteById(indice);
+    public void delete(String id) {
+        Long indice = Long.parseLong(id);
+        Optional<Show> showOpt = repository.findById(indice);
+
+        if (showOpt.isPresent()) {
+            Show show = showOpt.get();
+
+            // Nettoyer la relation ManyToMany avec ArtistType
+            for (ArtistType at : new ArrayList<>(show.getArtistTypes())) {
+                show.removeArtistType(at);  // Cette méthode gère aussi le côté inverse
+            }
+
+            repository.deleteById(indice);
+        }
     }
 
     public List<Show> getFromLocation(Location location) {
