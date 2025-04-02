@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/main}">
+<head>
+    <title>Back-office</title>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-4">
+    <h1>Tableau de bord (Admin)</h1>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <p>Bienvenue dans l'espace de gestion. Utilisez les liens ci-dessous pour gérer les entités :</p>
+
+        <ul>
+            <li><a th:href="@{/artists}">Gérer les artistes</a></li>
+            <li><a th:href="@{/shows}">Gérer les spectacles</a></li>
+            <li><a th:href="@{/types}">Gérer les types</a></li>
+            <li><a th:href="@{/localities}">Gérer les localités</a></li>
+            <li><a th:href="@{/representations}">Gérer les représentations</a></li>
+<!--            <li><a th:href="@{/locations}">Gérer les lieux</a></li>-->
+            <!-- Ajoute d'autres sections ici si nécessaire -->
+        </ul>
+    </div>
+
+    <div sec:authorize="!hasRole('ADMIN')">
+        <p class="text-danger">Accès refusé. Cette page est réservée aux administrateurs.</p>
+    </div>
+</div>
+</body>
+</html>
