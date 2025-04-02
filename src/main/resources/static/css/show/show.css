@@ -3,6 +3,8 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    /* Dégradé linéaire d’une couleur à l’autre de gauche à droite */
+    background: linear-gradient(to right, #1e90ff, #8a2be2);
 }
 
 .container {
@@ -69,7 +71,7 @@ nav a {
     margin-top: 20px;
     text-decoration: none;
     padding: 8px 15px;
-    background-color: #007bff; /* Couleur du bouton/lien */
+    background-color: #2B009A; /* Couleur du bouton/lien */
     color: #fff;
     border-radius: 4px;
 }

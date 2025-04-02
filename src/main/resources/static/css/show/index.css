@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1e90ff, #8a2be2);
 }
 
 /* Container principal */
@@ -21,7 +22,7 @@ h1 {
 
 /* Liens */
 a {
-    color: #007BFF;  /* bleu par défaut */
+    color: #2B009A;  /* bleu par défaut */
     text-decoration: none;
 }
 
