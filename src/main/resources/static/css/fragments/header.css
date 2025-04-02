@@ -1,0 +1,88 @@
+/* Empêche la navbar fixe de masquer le haut de la page */
+body {
+    margin: 0;
+    padding-top: 50px; /* Ajuste selon la hauteur de la navbar */
+    font-family: Arial, sans-serif;
+}
+
+/* Applique un dégradé ou une couleur de fond au header */
+.navbar-inverse {
+    background: linear-gradient(to right, #0059ff, #9838e6);
+    border: none;
+    border-radius: 0;
+    color: #fff;
+    min-height: 50px;
+}
+
+/* La marque (brand) de la navbar */
+.navbar-inverse .navbar-brand {
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Liens dans la nav (horizontal déjà géré par Bootstrap .navbar-nav) */
+.navbar-inverse .nav > li > a {
+    color: #fff;
+    /* Évite que le hover devienne invisible (Bootstrap applique un fond par défaut) */
+    padding: 15px 20px; /* Ajoute un peu d'espace autour des liens */
+    text-decoration: none;
+}
+
+/* Survol des liens */
+.navbar-inverse .nav > li > a:hover,
+.navbar-inverse .nav > li > a:focus {
+    background-color: rgba(255, 255, 255, 0.2); /* Léger fond blanc transparent */
+    color: #fff;
+}
+
+/* Ajoute un espace horizontal entre les <li> si souhaité */
+.navbar-inverse .nav > li {
+    margin-left: 15px; /* Ajoute un espace avant chaque lien */
+}
+
+/* Évite un espace “vide” avant le premier lien */
+.navbar-inverse .nav > li:first-child {
+    margin-left: 0;
+}
+
+/* Élément actif (si module = 'home' par ex.) */
+.navbar-inverse .nav > li.active > a {
+    background-color: #003080; /* Couleur plus sombre */
+    color: #fff;
+}
+
+/* Zone à droite (connexion/déconnexion) */
+.navbar-inverse .container > div[style*="float:right"] {
+    float: right;
+    color: #fff;
+    text-align: right;
+    margin-top: 10px; /* Ajuste pour l’alignement vertical */
+}
+
+/* Liens dans la zone de droite */
+.navbar-inverse .container > div[style*="float:right"] a {
+    color: #fff;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+.navbar-inverse .container > div[style*="float:right"] a:hover {
+    text-decoration: none;
+}
+
+/* Bouton “Se déconnecter” qui ressemble à un lien */
+.unset {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.unset:hover {
+    text-decoration: none;
+}
